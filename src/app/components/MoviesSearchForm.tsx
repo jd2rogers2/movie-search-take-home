@@ -20,19 +20,19 @@ const genreOptions: { value: string, text: string }[] = [
 export default function MoviesSearchForm() {
   const searchParams = useSearchParams();
   const [genre, setGenre] = useState(searchParams.get('genre') ?? '');
-  const [title, setTitle] = useState(searchParams.get('title') ?? '');
+  const [search, setSearch] = useState(searchParams.get('search') ?? '');
 
   async function onSubmit(formData: FormData) {
+    const params = [];
+    if (genre) { params.push(['genre', genre]); }
+    if (search) { params.push(['search', search]); }
 
-    const queryString = new URLSearchParams([
-      genre ? ['genre', genre] : [],
-      title ? ['title', title] : [],
-    ]).toString();
+    const queryString = new URLSearchParams(params).toString();
     redirect(`/movies/search?${queryString}`);
   }
 
-  function handleTitleChange(event: FormEvent<HTMLInputElement>) {
-    setTitle(event.currentTarget.value);
+  function handleSearchChange(event: FormEvent<HTMLInputElement>) {
+    setSearch(event.currentTarget.value);
   }
 
   function handleGenreChange(event: FormEvent<HTMLSelectElement>) {
@@ -44,7 +44,7 @@ export default function MoviesSearchForm() {
       <form action={onSubmit}>
         <div>
           <label>Movie Name:</label>
-          <input type="text" name="title" onChange={handleTitleChange} />
+          <input type="text" name="search" onChange={handleSearchChange} />
         </div>
         <div>
           <label>Genre:</label>
