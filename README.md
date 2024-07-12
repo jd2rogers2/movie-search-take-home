@@ -1,8 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Movie Search Page
 
-## Getting Started
+This is a user interface for a 3rd party movie API.
 
-First, run the development server:
+A user can:
+
+- search movies by title
+- search movies by genre
+- see search results count
+- see search results cards (clickable)
+  - paginated
+- see details on a movie
+
+## Project personal highlights
+
+1. Working with Next.js
+
+This is the most Next.js I've written. Before this I had spent about 3 hours checking it out and tinkering. So this was a super fun exercise in getting familiar with this new framework. 
+
+I'm sure it's not novel but I am proud of the single page solution I devised (there is a detail view page as well, but for the core requirements just the main one). There is one page with both the search and results features. All of the state uses the search params as a source of truth, so across navigates I add a new param and the page reloads with a new fetch having been called.
+
+2. Deploying to AWS EC2
+
+I'm currently going through my AWS certifications, so I have done some labs for practice with a couple services; but to put these skills to use for something more than a simulation was a great to solidify the theory with something tangible. 
+
+With this deployment I also incorporated Nginx as a reverse proxy. I really enjoyed learning the benefits of configuration for this industry standard tool.
+
+- What I would add next to the project:
+
+My first instinct is to product-ify the app. To me this means adding auth and a database component to the system. Then I could do many things like add likes or reviews and a recommendation feature based on that data. I'm sure it exists but something like a GoodReads but for movies could be fun. Everyone always has the "OK what are you watching now" convo and it'd be good to be able to pull ideas from others' lists when I'm settling in for a show.
+
+## Running locally
+
+First, `npm install`
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -16,21 +47,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
