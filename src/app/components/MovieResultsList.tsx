@@ -2,6 +2,7 @@
 
 import MovieCard from '@/app/components/MovieCard';
 import { API_KEY, API_URL_BASE } from '@/app/static';
+
 import type { Movie } from '@/app/types';
 
 
@@ -36,12 +37,24 @@ export default async function MovieResultsList({ searchParams }: { searchParams:
     if (!res.ok) {
       return { data: [], totalPages: 0 };
     }
-    const temp = await res.json();
-    return temp;
+    return res.json();
   }
   
   const { data, totalPages } = await getMovies();
-  console.log('totalPages', totalPages)
+
+  async function getLastPageCount(): Promise<number> {
+    const url = `${API_URL_BASE}/movies${getSearchParams(totalPages)}`;
+    const res = await fetch(
+      url,
+      { headers: { Accept: 'application/json', Authorization: `Bearer ${API_KEY}` } }
+    );
+
+    if (!res.ok) {
+      return 0;
+    }
+    return (await res.json()).data.length;
+  }
+  const lastPageCount = await getLastPageCount();
 
   const nextPage = currentPage === totalPages ? currentPage : currentPage + 1;
   const prevPage = currentPage === 1 ? 1 : currentPage - 1;
@@ -67,7 +80,7 @@ export default async function MovieResultsList({ searchParams }: { searchParams:
   return (
     <div>
       <div style={{ marginBottom: '10px' }}>
-        results: {totalPages * limit}
+        results: {totalPages * limit - (limit - lastPageCount)}
       </div>
       {pagination}
       <div
