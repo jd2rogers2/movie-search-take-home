@@ -40,23 +40,21 @@ export default function MoviesSearchForm() {
   }
 
   return (
-    <div>
-      <form action={onSubmit}>
-        <div>
-          <label>Movie Name:</label>
-          <input type="text" name="search" onChange={handleSearchChange} />
-        </div>
-        <div>
-          <label>Genre:</label>
-          <select name="genre" onChange={handleGenreChange}>
-            {genreOptions.map(g => (
-              <option key={g.value} value={g.value}>{g.text}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <button type="submit">Search</button>
-        </div>
+    <div style={{ margin: '20px' }}>
+      <form action={onSubmit} style={{ display: 'inline' }}>
+        <select name="genre" value={genre} onChange={handleGenreChange}>
+          {genreOptions.map(g => (
+            <option key={g.value} value={g.value}>{g.text}</option>
+          ))}
+        </select>
+        <input
+          type="text"
+          name="search"
+          placeholder='Search by movie title'
+          value={search}
+          onChange={handleSearchChange}
+        />
+        <button type="submit">Search</button>
       </form>
     </div>
   );

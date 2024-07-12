@@ -6,7 +6,8 @@ import MovieResultsList from '@/app/components/MovieResultsList';
 
 export default async function MoviesSearch({ searchParams }: { searchParams: { [key: string]: string } }) {
   return (
-    <main>
+    <main style={{ marginTop: '20px' }}>
+      <h1>Movie Search! :)</h1>
       <MoviesSearchForm />
       <MovieResultsList searchParams={searchParams} />
     </main>
